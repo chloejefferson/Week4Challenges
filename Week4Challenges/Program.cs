@@ -12,7 +12,12 @@ namespace Week4Challenges
         public double Weight { get; set; }
         public string OwnerFirstName { get; set; }
         public string OwnerLastName { get; set; }
-        // public abstract string OwnerNotes { get; set; }
+        //abstract method
+        public abstract void MakesNoise(); //abstract method (NO GET SET) NO DEFINITIONS {}. This will be required to specify for each Pet. 
+        public virtual void Bark() //virtual method. CAN HAVE DEFINITION {}. This is an OPTIONAL method that can be called in all Pets. You can override it as will to do something else.
+        {
+            Console.WriteLine("Bark!");
+        }
         public Pet() { }
         public Pet(string petName, double weight, string ownerFirstName, string ownerLastName)
         {
@@ -35,7 +40,22 @@ namespace Week4Challenges
             Breed = breed;
             NeedsTeamWhenHandled = needsTeamWhenHandled;
         }
+
+        public override void MakesNoise() //override our MakesNoise with our virtual we created in pet.
+        {
+            this.Bark();
+        }
     }
+
+    //Below is an example created during review w/ Casey Wilson 12/5
+    //public class Husky : Dog
+    //{
+        //public override void Bark()
+        //{
+            //Console.WriteLine("hooouuuulllowowowoowowoowowow");
+        //}
+    //}
+
     public class Cat : Pet
     {
         public string Breed { get; set; }
@@ -45,6 +65,11 @@ namespace Week4Challenges
         {
             Breed = breed;
             HasFelV = hasFelV;
+        }
+
+        public override void MakesNoise()
+        {
+            Console.WriteLine("Meow!");
         }
 
     }
@@ -58,6 +83,10 @@ namespace Week4Challenges
             Species = species;
             Venomous = venomous;
         }
+        public override void MakesNoise()
+        {
+            Console.WriteLine("I probably don't make much of any noise.");
+        }
     }
     public class OtherPet : Pet
     {
@@ -69,16 +98,23 @@ namespace Week4Challenges
             BiologicalClass = biologicalClass;
             Species = species;
         }
+        public override void MakesNoise()
+        {
+            throw new NotImplementedException(); //throws an exception (because I think there are too many noises other animals could make)
+        }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            var Dog = new Dog("Pembroke Welsh Corgi", false, "Kiki", 15.2, "Catherine", "Jingle");
-            var Cat = new Cat("Domestic Shorthair", true, "Sugar", 20.7, "Andrew", "Yang");
-            var Reptile = new Reptile("Ball Python", false, "Dex", 7.7, "Hector", "Allen");
-            var OtherPet = new OtherPet("Mammal", "Goat", "Charles", 30.1, "Mary", "Anderson");
+            var dog = new Dog("Pembroke Welsh Corgi", false, "Kiki", 15.2, "Catherine", "Jingle");
+            var cat = new Cat("Domestic Shorthair", true, "Sugar", 20.7, "Andrew", "Yang");
+            var reptile = new Reptile("Ball Python", false, "Dex", 7.7, "Hector", "Allen");
+            var otherPet = new OtherPet("Mammal", "Goat", "Charles", 30.1, "Mary", "Anderson");
 
+            //var husky = new Husky();
+            //husky.MakesNoise();
+            //Console.ReadLine();
         }
     }
 }
